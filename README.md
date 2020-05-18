@@ -28,7 +28,7 @@ The configuration options and the description at here:
 
 ## Useful reference
 
+- https://github.com/awslabs/kinesis-kafka-connector
 - https://docs.confluent.io/current/connect/userguide.html#distributed-mode
 - https://rmoff.net/2019/08/15/reset-kafka-connect-source-connector-offsets/
 - https://issues.apache.org/jira/browse/KAFKA-3988
-
