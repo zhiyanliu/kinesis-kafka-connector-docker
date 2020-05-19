@@ -12,9 +12,7 @@ RUN cd kinesis-kafka-connector && mvn package
 
 FROM confluentinc/cp-kafka-connect-base
 
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US:en
-ENV LC_ALL en_US.UTF-8
+ENV COMPONENT=kinesis-kafka-connect
 
 COPY --from=build /kinesis-kafka-connector/target/amazon-kinesis-kafka-connector-*-SNAPSHOT.jar \
                     /usr/share/java/kafka
