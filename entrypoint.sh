@@ -26,6 +26,7 @@ else
         STATUS_TOPIC=connect-offsets
     fi
 
+    echo "\n" >> /worker.properties
     sed -i '/^group.id=.*/d' /worker.properties
     echo "group.id=${GROUP_ID}" >> /worker.properties
     sed -i '/^offset.storage.topic=.*/d' /worker.properties
@@ -56,5 +57,10 @@ fi
 if ! [ -z $MAX_CONNECTIONS ]; then
     sed -i "/maxConnections=.*/c\maxConnections=${MAX_CONNECTIONS}" /kinesis-streams-kafka-connector.properties
 fi
+
+echo "worker.properties file content:"
+cat /worker.properties
+echo "kinesis-streams-kafka-connector.properties file content:"
+cat /kinesis-streams-kafka-connector.properties
 
 /usr/bin/$CMD /worker.properties /kinesis-streams-kafka-connector.properties
