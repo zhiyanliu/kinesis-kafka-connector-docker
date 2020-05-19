@@ -5,6 +5,7 @@ Need to provide `REGION` and `ACCOUNT` environment variables to push the image t
 ``REGION=us-west-2 ACCOUNT=123456789012 ./build.sh``
 
 >> **Note:**
+>>
 >> If you'd like just to build the image locally or won't like to involve ECR in, you might execute `docker build -t kinesis-kafka-connector:snapshot .` instead.
 
 ## Supported parameters
@@ -13,6 +14,9 @@ Follow environment variables will be loaded as the configuration to the connecto
 
 - BOOTSTRAP_SERVERS
 - GROUP_ID
+- OFFSET_TOPIC
+- CONFIG_TOPIC
+- STATUS_TOPIC
 - CONNECTOR_NAME
 - REGION
 - KINESIS_STREAM
