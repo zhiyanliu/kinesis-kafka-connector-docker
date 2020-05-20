@@ -22,7 +22,7 @@ else
         STATUS_TOPIC=connect-offsets
     fi
 
-    echo "\n" >> /worker.properties
+    echo >> /worker.properties
     sed -i '/^group.id=.*/d' /worker.properties
     echo "group.id=${GROUP_ID}" >> /worker.properties
     sed -i '/^offset.storage.topic=.*/d' /worker.properties
