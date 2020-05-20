@@ -4,10 +4,6 @@ set -ex
 
 # prepare worker configures
 
-if ! [ -z $BOOTSTRAP_SERVERS ]; then
-    sed -i "/^bootstrap.servers=.*/c\bootstrap.servers=${BOOTSTRAP_SERVERS}" /worker.properties
-fi
-
 if [ -z $GROUP_ID ]; then
     echo "GROUP_ID environment variable is not set"
     echo "running in standalone mode"
@@ -36,6 +32,14 @@ else
     sed -i '/^status.storage.topic=.*/d' /worker.properties
     echo "status.storage.topic=${STATUS_TOPIC}" >> /worker.properties
 fi
+
+if ! [ -z $BOOTSTRAP_SERVERS ]; then
+    sed -i "/^bootstrap.servers=.*/c\bootstrap.servers=${BOOTSTRAP_SERVERS}" /worker.properties
+fi
+
+sed -i '/^rest.host.name=.*/d' /worker.properties
+echo "rest.host.name=127.0.0.1" >> /worker.properties  # for docker healthcheck
+
 
 # prepare connector configures
 
