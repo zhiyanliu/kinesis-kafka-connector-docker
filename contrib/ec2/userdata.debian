@@ -1,0 +1,61 @@
+#!/bin/bash
+
+# Configuration
+
+DOCKER_IMAGE=326003834662.dkr.ecr.us-west-2.amazonaws.com/amazon/kinesis-kafka-connector:snapshot-0.0.9
+
+BOOTSTRAP_SERVERS=b-1.cluster1.1qftk6.c4.kafka.us-west-2.amazonaws.com:9092,b-2.cluster1.1qftk6.c4.kafka.us-west-2.amazonaws.com:9092,b-3.cluster1.1qftk6.c4.kafka.us-west-2.amazonaws.com:9092
+GROUP_ID=group1
+CONNECTOR_NAME=kinesis-kafka-connector
+REGION=us-west-2
+KINESIS_STREAM=teststream1
+KAFKA_TOPICS=topic1,topic2
+MAX_TASKS=10
+MAX_CONNECTIONS=20
+
+==================================
+
+set -ex
+
+# Install docker
+
+export DEBIAN_FRONTEND=noninteractive
+apt-get update && apt-get upgrade -y
+apt-get install -y apt-transport-https ca-certificates curl software-properties-common unzip
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+
+apt-get update
+apt-get install -y docker-ce
+
+# Install awscli
+
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "/tmp/awscliv2.zip"
+
+unzip /tmp/awscliv2.zip -d /tmp
+/tmp/aws/install && ln -s /usr/local/bin/aws /usr/bin/aws
+rm -rf /tmp/awscliv2.zip /tmp/aws
+
+# Login docker to the ECR
+
+aws ecr get-login-password  | docker login --username AWS --password-stdin $(echo $DOCKER_IMAGE | awk '{split($0, a, "/"); print a[1]}')
+
+# Pull the docker image
+
+docker pull $DOCKER_IMAGE
+
+# Launch the connector container
+
+docker run -e BOOTSTRAP_SERVERS=$BOOTSTRAP_SERVERS \
+           -e GROUP_ID=$GROUP_ID\
+           -e CONNECTOR_NAME=$CONNECTOR_NAME \
+           -e REGION=$REGION \
+           -e KINESIS_STREAM=$KINESIS_STREAM \
+           -e KAFKA_TOPICS=$KAFKA_TOPICS \
+           -e MAX_TASKS=$MAX_TASKS \
+           -e MAX_CONNECTIONS=$MAX_CONNECTIONS \
+           -d --rm $DOCKER_IMAGE
