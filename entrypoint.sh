@@ -38,7 +38,7 @@ if ! [ -z $BOOTSTRAP_SERVERS ]; then
 fi
 
 sed -i '/^rest.host.name=.*/d' /worker.properties
-echo "rest.host.name=127.0.0.1" >> /worker.properties  # for docker healthcheck
+echo "rest.host.name=0.0.0.0" >> /worker.properties
 
 
 # prepare connector configures
