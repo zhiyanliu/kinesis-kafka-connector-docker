@@ -14,4 +14,4 @@ This is a set of manifests can be leveraged in the scenario of running kinesis-k
 2. Execute `create_node_profile.sh` to create the EC2 instance profile in your IAM.
 3. For the HA and performance purpose, you probable need to leverage Amazon EC2 AutoScaling Group, it can maintain a connector fleet with a desired capacity, all connectors running under distributed mode in the same kafka consumer group.
    If so, you would have to create a `Launch Template` instead of launch a nude EC2 instance directly.
-4. Finally set configured `userdata.debin` content to the user-data option of the `Launch Template`, or the EC2 instance if running without AutoScaling Group support.
+4. Finally copy whole configured `userdata.debin` content to the user-data option of the `Launch Template`, or the EC2 instance if running without AutoScaling Group support.
