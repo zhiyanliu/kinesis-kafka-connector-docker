@@ -12,7 +12,7 @@ if [ -z $POLICY_NAME ]; then
     POLICY_NAME=KinesisKafkaConnectorECRImagePullPolicy
 fi
 
-==================================
+# ==================================
 
 set -ex
 
