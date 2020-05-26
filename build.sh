@@ -32,7 +32,7 @@ REPO=$ACCOUNT.dkr.ecr.$REGION.amazonaws.com
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 
 docker build -t $REPO/$IMG:$VER --rm $DIR
-docker rmi $(docker images -f "dangling=true" -q)  # remove intermediate images in build stage, optional
+docker rmi $(docker images -f "dangling=true" -q) || true  # remove intermediate images in build stage, optional
 
 aws ecr get-login-password --region $REGION \
     | docker login --username AWS --password-stdin $REPO  # assume the repository exists already
