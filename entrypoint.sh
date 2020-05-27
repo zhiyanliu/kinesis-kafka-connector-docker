@@ -6,6 +6,12 @@ set -ex
 
 echo >> /worker.properties  # append each option in dedicated line
 
+# for issue: https://issues.apache.org/jira/browse/KAFKA-3988
+sed -i '/internal\.key\.converter\.schemas\.enable=.*/d' /worker.properties
+echo "internal.key.converter.schemas.enable=false" >> /worker.properties
+sed -i '/internal\.value\.converter\.schemas\.enable=.*/d' /worker.properties
+echo "internal.value.converter.schemas.enable=false" >> /worker.properties
+
 if [ -z $GROUP_ID ]; then
     echo "GROUP_ID environment variable is not set"
     echo "running in standalone mode"
@@ -65,6 +71,7 @@ fi
 
 echo "worker.properties file content:"
 cat /worker.properties
+
 echo "kinesis-streams-kafka-connector.properties file content:"
 cat /kinesis-streams-kafka-connector.properties
 
