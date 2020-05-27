@@ -24,7 +24,7 @@ if [ -z $IMG ]; then
     IMG=amazon/kinesis-kafka-connector
 fi
 if [ -z $VER ]; then
-    VER=snaphot-0.0.9
+    VER=snapshot-0.0.9
 fi
 
 REPO=$ACCOUNT.dkr.ecr.$REGION.amazonaws.com
