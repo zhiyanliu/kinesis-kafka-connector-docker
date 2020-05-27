@@ -18,10 +18,10 @@ else
         OFFSET_TOPIC=connect-offsets
     fi
     if [ -z $CONFIG_TOPIC ]; then
-        CONFIG_TOPIC=connect-offsets
+        CONFIG_TOPIC=connect-config
     fi
     if [ -z $STATUS_TOPIC ]; then
-        STATUS_TOPIC=connect-offsets
+        STATUS_TOPIC=connect-status
     fi
 
     sed -i '/^group.id=.*/d' /worker.properties
