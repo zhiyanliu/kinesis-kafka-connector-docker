@@ -4,6 +4,8 @@ set -ex
 
 # prepare worker configures
 
+echo >> /worker.properties  # append each option in dedicated line
+
 if [ -z $GROUP_ID ]; then
     echo "GROUP_ID environment variable is not set"
     echo "running in standalone mode"
@@ -22,7 +24,6 @@ else
         STATUS_TOPIC=connect-offsets
     fi
 
-    echo >> /worker.properties
     sed -i '/^group.id=.*/d' /worker.properties
     echo "group.id=${GROUP_ID}" >> /worker.properties
     sed -i '/^offset.storage.topic=.*/d' /worker.properties
