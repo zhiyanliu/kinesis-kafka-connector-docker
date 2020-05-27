@@ -66,4 +66,6 @@ docker run -e BOOTSTRAP_SERVERS=$BOOTSTRAP_SERVERS \
            -e KAFKA_TOPICS=$KAFKA_TOPICS \
            -e MAX_TASKS=$MAX_TASKS \
            -e MAX_CONNECTIONS=$MAX_CONNECTIONS \
-           -d --rm $DOCKER_IMAGE
+           -d --restart always \
+           --name $CONNECTOR_NAME \
+           $DOCKER_IMAGE
