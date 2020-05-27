@@ -10,7 +10,7 @@ RUN git clone https://github.com/awslabs/kinesis-kafka-connector.git
 RUN cd kinesis-kafka-connector && mvn package
 
 
-FROM confluentinc/cp-kafka-connect-base
+FROM confluentinc/cp-kafka-connect-base:5.2.4-1
 
 ENV COMPONENT=kinesis-kafka-connect
 
