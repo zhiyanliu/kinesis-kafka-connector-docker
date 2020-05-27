@@ -25,3 +25,6 @@ ADD entrypoint.sh /
 RUN chmod u+x /entrypoint.sh
 
 CMD ["/entrypoint.sh"]
+
+HEALTHCHECK --start-period=120s --interval=5s --timeout=10s --retries=3 \
+	CMD curl -sX GET -H "Content-Type: application/json" http://127.0.0.1:8083/connector-plugins | jq "." | grep 'com.amazon.kinesis.kafka.AmazonKinesisSinkConnector'
