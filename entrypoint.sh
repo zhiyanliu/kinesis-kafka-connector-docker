@@ -15,10 +15,8 @@ echo "internal.value.converter.schemas.enable=false" >> /worker.properties
 if [ -z $GROUP_ID ]; then
     echo "GROUP_ID environment variable is not set"
     echo "running in standalone mode"
-    CMD=connect-standalone
 else
     echo "running in distributed mode"
-    CMD=connect-distributed
 
     if [ -z $OFFSET_TOPIC ]; then
         OFFSET_TOPIC=connect-offsets
@@ -69,10 +67,31 @@ if ! [ -z $MAX_CONNECTIONS ]; then
     sed -i "/^maxConnections=.*/c\maxConnections=${MAX_CONNECTIONS}" /kinesis-streams-kafka-connector.properties
 fi
 
+if ! [ -z $GROUP_ID ]; then
+    wget -q https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 -O /usr/bin/jq
+    chmod u+x /usr/bin/jq
+    grep -v '#' /kinesis-streams-kafka-connector.properties | \
+        jq -sR '{
+                   "name": split("\n")[0:1][] | rtrimstr("\\r") | split("=") | (.[1]),
+                   "config": [split("\n")[1:-1][] | rtrimstr("\\r") | split("=") | {(.[0]): .[1]}]  | add
+                }' - > /kinesis-streams-kafka-connector.post
+fi
+
+# print connector configures
+
 echo "worker.properties file content:"
 cat /worker.properties
+if [ -z $GROUP_ID ]; then
+    echo "kinesis-streams-kafka-connector.properties file content:"
+    cat /kinesis-streams-kafka-connector.properties
+else
+    echo "kinesis-streams-kafka-connector REST post body:"
+    cat /kinesis-streams-kafka-connector.post
+fi
 
-echo "kinesis-streams-kafka-connector.properties file content:"
-cat /kinesis-streams-kafka-connector.properties
-
-/usr/bin/$CMD /worker.properties /kinesis-streams-kafka-connector.properties
+# start connector
+if [ -z $GROUP_ID ]; then
+    /usr/bin/connect-standalone /worker.properties /kinesis-streams-kafka-connector.properties
+else
+    /usr/bin/connect-distributed /worker.properties
+fi
