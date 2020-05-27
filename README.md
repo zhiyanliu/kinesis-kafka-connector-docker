@@ -2,11 +2,12 @@
 
 Need to provide `REGION` and `ACCOUNT` environment variables to push the image to AWS ECR, for example:
 
-``REGION=us-west-2 ACCOUNT=123456789012 ./build.sh``
+``REGION={your_aws_region} ACCOUNT={your_aws_account_id} ./build.sh``
 
 >> **Note:**
->>
->> If you'd like just to build the image locally or won't like to involve ECR in, you might execute `docker build -t kinesis-kafka-connector:snapshot .` instead.
+>> - Update `{your_aws_region}` to the valid AWS region according to your environment, e.g. `us-west-2`.
+>> - Update `{your_aws_account_id}` to the valid AWS account ID according to your environment, e.g. `123456789012`.
+>> - If you'd like just to build the image locally or won't like to involve ECR in, you might execute `docker build -t kinesis-kafka-connector:snapshot .` instead.
 
 ## Supported parameters
 

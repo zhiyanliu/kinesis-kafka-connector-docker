@@ -86,7 +86,7 @@ spec:
       containers:
         - name: kinesis-kafka-connector
           # update the address according to your image repo
-          image: 123456789012.dkr.ecr.us-west-2.amazonaws.com/amazon/kinesis-kafka-connector:snapshot-0.0.9
+          image: {your_aws_account_id}.dkr.ecr.{your_aws_region}.amazonaws.com/amazon/kinesis-kafka-connector:snapshot-0.0.9
           env:
             - name: BOOTSTRAP_SERVERS
               value: localhost:9092,127.0.0.1:9092
@@ -95,7 +95,7 @@ spec:
             - name: CONNECTOR_NAME
               value: kinesis-kafka-connector
             - name: REGION
-              value: us-west-2
+              value: {your_aws_region}
             - name: KINESIS_STREAM
               value: stream1
             - name: KAFKA_TOPICS
