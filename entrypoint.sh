@@ -72,7 +72,6 @@ sed -i "/^bootstrap\.servers=.*/c\bootstrap.servers=${BOOTSTRAP_SERVERS}" /worke
 sed -i '/^rest\.host\.name=.*/d' /worker.properties
 echo "rest.host.name=0.0.0.0" >> /worker.properties
 
-
 # prepare connector configures
 
 sed -i "/^name=.*/c\name=${CONNECTOR_NAME}" /kinesis-streams-kafka-connector.properties

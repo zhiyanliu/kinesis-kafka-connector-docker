@@ -19,21 +19,22 @@ Need to provide `REGION` and `ACCOUNT` environment variables to push the image t
 
 Follow environment variables will be loaded as the configuration to the connector:
 
-- BOOTSTRAP_SERVERS ***required***
-- GROUP_ID *required in distributed mode*
-- OFFSET_TOPIC *optional, connect-offsets by default*
-- CONFIG_TOPIC *optional, connect-config by default*
-- STATUS_TOPIC *optional, connect-status by default*
-- OFFSET_REPLICA *optional, 2 by default*
-- CONFIG_REPLICA *optional, 2 by default*
-- STATUS_REPLICA *optional, 2 by default*
-- CONNECTOR_NAME *optional, kinesis-kafka-connector by default*
-- REGION ***required***
-- KINESIS_STREAM ***required***
-- KAFKA_TOPICS ***required***
-- MAX_TASKS *optional, 1 by default*
-- MAX_CONNECTIONS *optional, 1 by default*
-
+|                 |                                |Default value          |
+|-----------------|--------------------------------|-----------------------|
+|BOOTSTRAP_SERVERS|**required**                    |                       |
+|GROUP_ID         |**required** in distributed mode|                       |
+|OFFSET_TOPIC     |*optional*                      |connect-offsets        |
+|CONFIG_TOPIC     |*optional*                      |connect-config         |
+|STATUS_TOPIC     |*optional*                      |connect-status         |
+|OFFSET_REPLICA   |*optional*                      |2                      |
+|CONFIG_REPLICA   |*optional*                      |2                      |
+|STATUS_REPLICA   |*optional*                      |2                      |
+|CONNECTOR_NAME   |*optional*                      |kinesis-kafka-connector|
+|REGION           |**required**                    |                       |
+|KINESIS_STREAM   |**required**                    |                       |
+|KAFKA_TOPICS     |**required**                    |                       |
+|MAX_TASKS        |*optional*                      |1                      |
+|MAX_CONNECTIONS  |*optional*                      |1                      |
 
 The configuration options and the description at here:
 
