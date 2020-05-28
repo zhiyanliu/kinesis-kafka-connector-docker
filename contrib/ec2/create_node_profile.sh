@@ -2,15 +2,9 @@
 
 # Configuration
 
-if [ -z $INSTANCE_PROFILE_NAME ]; then
-    INSTANCE_PROFILE_NAME=KinesisKafkaConnector
-fi
-if [ -z $ROLE_NAME ]; then
-    ROLE_NAME=KinesisKafkaConnectorRole
-fi
-if [ -z $POLICY_NAME ]; then
-    POLICY_NAME=KinesisKafkaConnectorECRImagePullPolicy
-fi
+INSTANCE_PROFILE_NAME=${INSTANCE_PROFILE_NAME:-KinesisKafkaConnector}
+ROLE_NAME=${ROLE_NAME:-KinesisKafkaConnectorRole}
+POLICY_NAME=${POLICY_NAME:-KinesisKafkaConnectorECRImagePullPolicy}
 
 # ==================================
 

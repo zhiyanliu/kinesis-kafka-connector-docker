@@ -19,20 +19,21 @@ Need to provide `REGION` and `ACCOUNT` environment variables to push the image t
 
 Follow environment variables will be loaded as the configuration to the connector:
 
-- BOOTSTRAP_SERVERS
-- GROUP_ID
-- OFFSET_TOPIC
-- CONFIG_TOPIC
-- STATUS_TOPIC
-- OFFSET_REPLICA
-- CONFIG_REPLICA
-- STATUS_REPLICA
-- CONNECTOR_NAME
-- REGION
-- KINESIS_STREAM
-- KAFKA_TOPICS
-- MAX_TASKS
-- MAX_CONNECTIONS
+- BOOTSTRAP_SERVERS ***required***
+- GROUP_ID *required in distributed mode*
+- OFFSET_TOPIC *optional, connect-offsets by default*
+- CONFIG_TOPIC *optional, connect-config by default*
+- STATUS_TOPIC *optional, connect-status by default*
+- OFFSET_REPLICA *optional, 2 by default*
+- CONFIG_REPLICA *optional, 2 by default*
+- STATUS_REPLICA *optional, 2 by default*
+- CONNECTOR_NAME *optional, kinesis-kafka-connector by default*
+- REGION ***required***
+- KINESIS_STREAM ***required***
+- KAFKA_TOPICS ***required***
+- MAX_TASKS *optional, 1 by default*
+- MAX_CONNECTIONS *optional, 1 by default*
+
 
 The configuration options and the description at here:
 

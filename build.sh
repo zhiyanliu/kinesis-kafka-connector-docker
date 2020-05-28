@@ -20,12 +20,8 @@ if [ -z $REGION ]; then
     exit 1
 fi
 
-if [ -z $IMG ]; then
-    IMG=amazon/kinesis-kafka-connector
-fi
-if [ -z $VER ]; then
-    VER=snapshot-0.0.9
-fi
+IMG=${IMG:-amazon/kinesis-kafka-connector}
+VER=${VER:-snapshot-0.0.9}
 
 REPO=$ACCOUNT.dkr.ecr.$REGION.amazonaws.com
 
