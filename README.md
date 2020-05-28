@@ -36,7 +36,7 @@ Follow environment variables will be loaded as the configuration to the connecto
 |MAX_TASKS        |*optional*                      |1                      |
 |MAX_CONNECTIONS  |*optional*                      |1                      |
 
-The configuration options and the description at here:
+The connector's configuration options and descriptions are at here for reference:
 
 - https://github.com/awslabs/kinesis-kafka-connector/blob/master/config/kinesis-streams-kafka-connector.properties
 - https://github.com/awslabs/kinesis-kafka-connector/blob/master/README.md#kafka-kinesis-streams-connectorproperties
@@ -44,10 +44,10 @@ The configuration options and the description at here:
 
 ## Additional one-time step in distributed mode
 
-If you are going to run the connector in distributed mode (when the environment variable `GROUP_ID` is provide)
+If you are going to run the connector in distributed mode (when the environment variable `GROUP_ID` is provided)
 an one-time step is needed to create the connector, due to in this mode the connector will not be created automatically
-by the command line but is created by a separated RESTful API call instead. For an instance, you can run this command
-from your any one local where to run the connector docker container to do this creation step:
+by the command line but by a separated RESTful API call instead. For an instance, you can run this command
+from your any local where to run the connector docker container to do this creation step:
 
 ``docker exec {kinesis_kafka_connector_container_name_or_id} curl -sX POST -H "Content-Type: application/json" --data-binary @/kinesis-streams-kafka-connector.post http://127.0.0.1:8083/connectors``
 
