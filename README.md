@@ -24,6 +24,9 @@ Follow environment variables will be loaded as the configuration to the connecto
 - OFFSET_TOPIC
 - CONFIG_TOPIC
 - STATUS_TOPIC
+- OFFSET_REPLICA
+- CONFIG_REPLICA
+- STATUS_REPLICA
 - CONNECTOR_NAME
 - REGION
 - KINESIS_STREAM

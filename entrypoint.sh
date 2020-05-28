@@ -7,9 +7,9 @@ set -ex
 echo >> /worker.properties  # append each option in dedicated line
 
 # for issue: https://issues.apache.org/jira/browse/KAFKA-3988
-sed -i '/internal\.key\.converter\.schemas\.enable=.*/d' /worker.properties
+sed -i '/^internal\.key\.converter\.schemas\.enable=.*/d' /worker.properties
 echo "internal.key.converter.schemas.enable=false" >> /worker.properties
-sed -i '/internal\.value\.converter\.schemas\.enable=.*/d' /worker.properties
+sed -i '/^internal\.value\.converter\.schemas\.enable=.*/d' /worker.properties
 echo "internal.value.converter.schemas.enable=false" >> /worker.properties
 
 if [ -z $GROUP_ID ]; then
@@ -18,24 +18,40 @@ if [ -z $GROUP_ID ]; then
 else
     echo "running in distributed mode"
 
+    sed -i '/^group\.id=.*/d' /worker.properties
+    echo "group.id=${GROUP_ID}" >> /worker.properties
+
     if [ -z $OFFSET_TOPIC ]; then
         OFFSET_TOPIC=connect-offsets
     fi
+    sed -i '/^offset\.storage\.topic=.*/d' /worker.properties
+    echo "offset.storage.topic=${OFFSET_TOPIC}" >> /worker.properties
     if [ -z $CONFIG_TOPIC ]; then
         CONFIG_TOPIC=connect-config
     fi
+    sed -i '/^config\.storage\.topic=.*/d' /worker.properties
+    echo "config.storage.topic=${CONFIG_TOPIC}" >> /worker.properties
     if [ -z $STATUS_TOPIC ]; then
         STATUS_TOPIC=connect-status
     fi
-
-    sed -i '/^group\.id=.*/d' /worker.properties
-    echo "group.id=${GROUP_ID}" >> /worker.properties
-    sed -i '/^offset\.storage\.topic=.*/d' /worker.properties
-    echo "offset.storage.topic=${OFFSET_TOPIC}" >> /worker.properties
-    sed -i '/^config\.storage\.topic=.*/d' /worker.properties
-    echo "config.storage.topic=${CONFIG_TOPIC}" >> /worker.properties
     sed -i '/^status\.storage\.topic=.*/d' /worker.properties
     echo "status.storage.topic=${STATUS_TOPIC}" >> /worker.properties
+
+    if [ -z $OFFSET_REPLICA ]; then
+          OFFSET_REPLICA=2
+    fi
+    sed -i '/^offset\.storage\.replication\.factor=.*/d' /worker.properties
+    echo "offset.storage.replication.factor=${OFFSET_REPLICA}" >> /worker.properties
+    if [ -z $CONFIG_REPLICA ]; then
+          CONFIG_REPLICA=2
+    fi
+    sed -i '/^config\.storage\.replication\.factor=.*/d' /worker.properties
+    echo "config.storage.replication.factor=${CONFIG_REPLICA}" >> /worker.properties
+    if [ -z $STATUS_REPLICA ]; then
+          STATUS_REPLICA=2
+    fi
+    sed -i '/^status\.storage\.replication\.factor=.*/d' /worker.properties
+    echo "status.storage.replication.factor=${STATUS_REPLICA}" >> /worker.properties
 fi
 
 if ! [ -z $BOOTSTRAP_SERVERS ]; then
