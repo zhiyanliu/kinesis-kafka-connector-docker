@@ -64,3 +64,7 @@ and the connector will be reloaded automatically after restart from all distribu
 - https://docs.confluent.io/current/connect/userguide.html#distributed-mode
 - https://rmoff.net/2019/08/15/reset-kafka-connect-source-connector-offsets/
 - https://issues.apache.org/jira/browse/KAFKA-3988
+
+## TODO
+
+- [ ] Allow connect to TLS bootstrap servers, by adding a parameter `SECURITY_PROTOCOL` and set internal option `security.protocol` to SSL from PLAINTEXT.
