@@ -59,6 +59,19 @@ from your any local where to run the connector docker container to do this creat
 This is an one-time step, the connector configuration will be saved to the topic in your kafka cluster named by `CONFIG_TOPIC` option,
 and the connector will be reloaded automatically after restart from all distributed instances.
 
+## About records aggregation
+
+To improve message transmission performance, by default (the option `ENABLE_AGGREGATION`) the connector use aggregation to combine the records loaded from kafka and write to the kinesis data stream.
+If you then use that data stream as a source for your kinesis data firehose delivery stream, kinesis data firehose de-aggregates the records before it delivers them to the destination.
+If you configure your delivery stream to transform the data, kinesis data firehose de-aggregates the records before it delivers them to lambda.
+However if you use that data stream as a source for your kinesis data analytics application, you need either to de-aggregate the records in your application or disable the aggregation in the connector by setting option `ENABLE_AGGREGATION` to `false`.
+
+For the high transmission performance, it would be better to de-aggregate the records by your application instead of to disable aggregation in the connector.
+
+If you are using lambda, for example, the python code to de-aggregate the records is introduced at:
+
+- https://github.com/awslabs/kinesis-aggregation/blob/master/python/README.md#examples-1
+
 ## Useful reference
 
 - https://github.com/awslabs/kinesis-kafka-connector
