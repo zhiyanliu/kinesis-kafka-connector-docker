@@ -19,22 +19,23 @@ Need to provide `REGION` and `ACCOUNT` environment variables to push the image t
 
 Follow environment variables will be loaded as the configuration to the connector:
 
-|                 |                                |Default value          |
-|-----------------|--------------------------------|-----------------------|
-|BOOTSTRAP_SERVERS|**required**                    |                       |
-|GROUP_ID         |**required** in distributed mode|                       |
-|OFFSET_TOPIC     |*optional*                      |connect-offsets        |
-|CONFIG_TOPIC     |*optional*                      |connect-config         |
-|STATUS_TOPIC     |*optional*                      |connect-status         |
-|OFFSET_REPLICA   |*optional*                      |2                      |
-|CONFIG_REPLICA   |*optional*                      |2                      |
-|STATUS_REPLICA   |*optional*                      |2                      |
-|CONNECTOR_NAME   |*optional*                      |kinesis-kafka-connector|
-|REGION           |**required**                    |                       |
-|KINESIS_STREAM   |**required**                    |                       |
-|KAFKA_TOPICS     |**required**                    |                       |
-|MAX_TASKS        |*optional*                      |1                      |
-|MAX_CONNECTIONS  |*optional*                      |1                      |
+|                  |                                |Default value          |
+|------------------|--------------------------------|-----------------------|
+|BOOTSTRAP_SERVERS |**required**                    |                       |
+|GROUP_ID          |**required** in distributed mode|                       |
+|OFFSET_TOPIC      |*optional*                      |connect-offsets        |
+|CONFIG_TOPIC      |*optional*                      |connect-config         |
+|STATUS_TOPIC      |*optional*                      |connect-status         |
+|OFFSET_REPLICA    |*optional*                      |2                      |
+|CONFIG_REPLICA    |*optional*                      |2                      |
+|STATUS_REPLICA    |*optional*                      |2                      |
+|CONNECTOR_NAME    |*optional*                      |kinesis-kafka-connector|
+|REGION            |**required**                    |                       |
+|KINESIS_STREAM    |**required**                    |                       |
+|KAFKA_TOPICS      |**required**                    |                       |
+|MAX_TASKS         |*optional*                      |1                      |
+|MAX_CONNECTIONS   |*optional*                      |1                      |
+|ENABLE_AGGREGATION|*optional*                      |true                   |
 
 The connector's configuration options and descriptions are at here for reference:
 
