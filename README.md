@@ -76,6 +76,7 @@ If you are using lambda, for example, the python code to de-aggregate the record
 
 - https://github.com/awslabs/kinesis-kafka-connector
 - https://docs.confluent.io/current/connect/userguide.html#distributed-mode
+- https://docs.confluent.io/current/connect/design.html#architecture
 - https://rmoff.net/2019/08/15/reset-kafka-connect-source-connector-offsets/
 - https://issues.apache.org/jira/browse/KAFKA-3988
 
