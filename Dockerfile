@@ -6,9 +6,9 @@ ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
 RUN apt-get update && apt-get upgrade -y && apt-get install -y git maven
-RUN git clone https://github.com/awslabs/kinesis-kafka-connector.git
+RUN git clone https://github.com/zhiyanliu/kinesis-kafka-connector.git
 # lock to the version and build
-RUN cd kinesis-kafka-connector && git checkout 267524b && mvn package
+RUN cd kinesis-kafka-connector && git checkout fae5c03 && mvn package
 
 
 FROM confluentinc/cp-kafka-connect-base:5.2.4-1
