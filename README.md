@@ -36,6 +36,9 @@ Follow environment variables will be loaded as the configuration to the connecto
 |MAX_TASKS         |*optional*                      |1                      |
 |MAX_CONNECTIONS   |*optional*                      |1                      |
 |ENABLE_AGGREGATION|*optional*                      |true                   |
+|RATE_LIMIT        |*optional*                      |100                    |
+|MAX_BUFFERED_TIME |*optional*                      |1500                   |
+|RECORD_TTL        |*optional*                      |60000                  |
 
 The connector's configuration options and descriptions are at here for reference:
 

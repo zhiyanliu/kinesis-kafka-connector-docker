@@ -14,6 +14,9 @@ CONNECTOR_NAME=${CONNECTOR_NAME:-kinesis-kafka-connector}
 MAX_TASKS=${MAX_TASKS:-1}
 MAX_CONNECTIONS=${MAX_CONNECTIONS:-1}
 ENABLE_AGGREGATION=${ENABLE_AGGREGATION:-true}
+RATE_LIMIT=${RATE_LIMIT:-100}
+MAX_BUFFERED_TIME=${MAX_BUFFERED_TIME:-1500}
+RECORD_TTL=${RECORD_TTL:-60000}
 
 # check required options for fail-fast
 
@@ -81,8 +84,10 @@ sed -i "/^streamName=.*/c\streamName=${KINESIS_STREAM}" /kinesis-streams-kafka-c
 sed -i "/^topics=.*/c\topics=${KAFKA_TOPICS}" /kinesis-streams-kafka-connector.properties
 sed -i "/^tasks\.max=.*/c\tasks.max=${MAX_TASKS}" /kinesis-streams-kafka-connector.properties
 sed -i "/^maxConnections=.*/c\maxConnections=${MAX_CONNECTIONS}" /kinesis-streams-kafka-connector.properties
-sed -i "/^aggregration=.*/c\aggregration=${ENABLE_AGGREGATION}" /kinesis-streams-kafka-connector.properties  # aggregration here is NOT a typo
-
+sed -i "/^aggregration=.*/c\aggregration=${ENABLE_AGGREGATION}" /kinesis-streams-kafka-connector.properties  # "aggregration" here is NOT a typo
+sed -i "/^rateLimit=.*/c\rateLimit=${RATE_LIMIT}" /kinesis-streams-kafka-connector.properties
+sed -i "/^maxBufferedTime=.*/c\maxBufferedTime=${MAX_BUFFERED_TIME}" /kinesis-streams-kafka-connector.properties
+sed -i "/^ttl=.*/c\ttl=${RECORD_TTL}" /kinesis-streams-kafka-connector.properties
 
 if ! [ -z $GROUP_ID ]; then
     wget -q https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 -O /usr/bin/jq
