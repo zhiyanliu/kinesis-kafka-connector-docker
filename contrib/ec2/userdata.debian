@@ -67,6 +67,7 @@ docker run -e BOOTSTRAP_SERVERS=$BOOTSTRAP_SERVERS \
            -e MAX_TASKS=$MAX_TASKS \
            -e MAX_CONNECTIONS=$MAX_CONNECTIONS \
            -d --restart always \
+           -p 8083:8083 \
            --log-opt max-size=100m --log-opt max-file=10 \
            --name $CONNECTOR_NAME \
            $DOCKER_IMAGE
