@@ -17,6 +17,7 @@ ENABLE_AGGREGATION=${ENABLE_AGGREGATION:-true}
 RATE_LIMIT=${RATE_LIMIT:-100}
 MAX_BUFFERED_TIME=${MAX_BUFFERED_TIME:-1500}
 RECORD_TTL=${RECORD_TTL:-60000}
+OUTSTANDING_RECORD_THRESHOLD=${OUTSTANDING_RECORD_THRESHOLD:-10}
 
 if [ -z $REST_ADVERTISED_HOSTNAME ]; then
     # use EC2 way to setup advertised hostname by default, use internal subnet ip
@@ -97,6 +98,7 @@ sed -i "/^aggregration=.*/c\aggregration=${ENABLE_AGGREGATION}" /kinesis-streams
 sed -i "/^rateLimit=.*/c\rateLimit=${RATE_LIMIT}" /kinesis-streams-kafka-connector.properties
 sed -i "/^maxBufferedTime=.*/c\maxBufferedTime=${MAX_BUFFERED_TIME}" /kinesis-streams-kafka-connector.properties
 sed -i "/^ttl=.*/c\ttl=${RECORD_TTL}" /kinesis-streams-kafka-connector.properties
+sed -i "/^outstandingRecordsThreshold=.*/c\outstandingRecordsThreshold=${OUTSTANDING_RECORD_THRESHOLD}" /kinesis-streams-kafka-connector.properties
 
 if ! [ -z $GROUP_ID ]; then
     wget -q https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 -O /usr/bin/jq
