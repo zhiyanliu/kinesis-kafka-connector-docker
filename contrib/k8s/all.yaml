@@ -101,6 +101,10 @@ spec:
               value: "10"
             - name: MAX_CONNECTIONS
               value: "20"
+            - name: REST_ADVERTISED_HOSTNAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
           ports:
             - name: rest-port
               containerPort: 8083
