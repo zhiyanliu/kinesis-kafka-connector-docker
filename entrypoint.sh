@@ -18,6 +18,11 @@ RATE_LIMIT=${RATE_LIMIT:-100}
 MAX_BUFFERED_TIME=${MAX_BUFFERED_TIME:-1500}
 RECORD_TTL=${RECORD_TTL:-60000}
 
+if [ -z $REST_ADVERTISED_HOSTNAME ]; then
+    # use EC2 way to setup advertised hostname by default, use internal subnet ip
+    REST_ADVERTISED_HOSTNAME=$(curl --connect-timeout 1 --max-time 3 -s http://169.254.169.254/1.0/meta-data/local-ipv4)
+fi
+
 # check required options for fail-fast
 
 if [ -z $BOOTSTRAP_SERVERS ]; then
@@ -75,6 +80,10 @@ sed -i "/^bootstrap\.servers=.*/c\bootstrap.servers=${BOOTSTRAP_SERVERS}" /worke
 
 sed -i '/^rest\.host\.name=.*/d' /worker.properties
 echo "rest.host.name=0.0.0.0" >> /worker.properties
+
+if ! [ -z $REST_ADVERTISED_HOSTNAME ]; then
+    echo "rest.advertised.host.name=${REST_ADVERTISED_HOSTNAME}" >> /worker.properties
+fi
 
 # prepare connector configures
 
